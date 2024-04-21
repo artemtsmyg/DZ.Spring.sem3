@@ -17,40 +17,37 @@ public class TaskController {
     private DataProcessingService service;
 
     @GetMapping
-    public List<String> getAllTasks()
-    {
+    public List<String> getAllTasks() {
         List<String> tasks = new ArrayList<>();
         tasks.add("sort");
         tasks.add("filter");
         tasks.add("calc");
-        return  tasks;
+        return tasks;
     }
 
     @GetMapping("/sort")//localhost:8080/tasks/sort
-    public List<User> sortUsersByAge()
-    {
+    public List<User> sortUsersByAge() {
         return service.sortUsersByAge(service.getRepository().getUsers());
     }
 
     /**
-     * Метод получения списка пользователей с фильтром по возрасту
-     * @param age возраст
-     * @return список пользователей
+     * Фильтровать пользователей по возрасту
+     *
+     * @param age Возраст для фильтрации пользователей
+     * @return Список пользователей, отфильтрованный по возрасту
      */
     @GetMapping("/filter/{age}")
-    public List<User> filterUsersByAg(@PathVariable("age") int age) {
-        List<User> users = service.getUsers();
-        return service.filterUserByAge(users, age);
+    public List<User> filterUsersByAge(@PathVariable int age) {
+        return service.filterUsersByAge(service.getRepository().getUsers(), age);
     }
 
     /**
-     * Метод получения среднего возраста пользователей
-     * @return средний возраст
+     * Рассчитайте средний возраст пользователей
+     *
+     * @return Средний возраст пользователей
      */
     @GetMapping("/calc")
-    public Double calculateAverageAge() {
-        List<User> users = service.getUsers();
-        return service.calculateAverageAge(users);
+    public double calculateAverageAge() {
+        return service.calculateAverageAge(service.getRepository().getUsers());
     }
-
 }

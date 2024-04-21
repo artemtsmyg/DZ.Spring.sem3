@@ -54,4 +54,7 @@ public class DataProcessingService {
 
     public void addUser(User createUser) {
     }
+
+    public void processUserData(User user) {
+    }
 }

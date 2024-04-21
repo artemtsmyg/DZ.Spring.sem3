@@ -10,7 +10,7 @@ public class NotificationService {
         System.out.println("A new user has been created: " + user.getName());
     }
 
-    public void sendNotification(String s) {
+    public void sendNotification(String s, String string) {
         System.out.println(s);
     }
 }

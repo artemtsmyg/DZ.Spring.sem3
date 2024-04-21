@@ -47,14 +47,17 @@ public class RegistrationService {
     }
 
     /**
-     * Сохранение пользователя в БД.
-     * @param name имя пользователя.
-     * @param age возраст пользователя.
-     * @param email email пользователя.
+     * Обработайте регистрацию нового пользователя
+     * @param user Пользовательский объект, содержащий регистрационные данные
      */
-    public void processRegistration(String name, int age, String email){
-        User createUser = userService.createUser(name, age, email);
-        dataProcessingService.addUser(createUser);
-        notificationService.sendNotification("User added from body");
+    public void processRegistration(User user) {
+// Выполнять обработку данных
+        dataProcessingService.processUserData(user);
+
+// Сохранение сведений о пользователе в базе данных
+        userService.saveUser(user);
+
+// Отправить уведомление пользователю
+        notificationService.sendNotification(user.getEmail(), "Welcome to our platform, " + user.getName() + "! You have successfully registered.");
     }
 }
